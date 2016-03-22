@@ -1,0 +1,59 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "db"
+  },
+  "AccessToken": {
+    "dataSource": "db",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "db",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Role": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Participants": {
+    "dataSource": "mongoDs",
+    "public": true
+  },
+  "Recompenses": {
+    "dataSource": "mongoDs",
+    "public": true
+  },
+  "Codes": {
+    "dataSource": "mongoDs",
+    "public": true
+  },
+  "Restaurants": {
+    "dataSource": "mongoDs",
+    "public": true
+  },
+  "Serveurs": {
+    "dataSource": "mongoDs",
+    "public": true
+  },
+  "Administrateurs": {
+    "dataSource": "mongoDs",
+    "public": true
+  }
+}

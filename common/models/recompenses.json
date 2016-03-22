@@ -1,0 +1,31 @@
+{
+  "name": "Recompenses",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "designation": {
+      "type": "string",
+      "required": true
+    },
+    "quantite": {
+      "type": "number",
+      "required": true
+    },
+    "image": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "codes": {
+      "type": "hasMany",
+      "model": "Codes",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
