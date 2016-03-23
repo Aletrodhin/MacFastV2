@@ -1,0 +1,21 @@
+{
+  "name": "MacFastV2",
+  "description": "MacFastV2",
+  "main": "server/server.js",
+  "authors": [
+    "ducournau <ducournau.fabien@gmail.com>"
+  ],
+  "license": "UNLICENSED",
+  "homepage": "https://github.com/Aletrodhin/MacFastV2",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.5.2"
+  }
+}
