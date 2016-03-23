@@ -1,7 +1,8 @@
 /**
- * Created by fabien on 23/03/16.
+ * Main program
  */
-
-var app = angular.module('macFast', [
+angular.module('app', [
+    'ui.router',
+    'lbServices',
     'recompense'
 ]);
