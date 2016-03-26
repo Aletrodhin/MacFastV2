@@ -10,21 +10,16 @@ var recompenseMod = angular.module('recompense', [
 recompenseMod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 
     $stateProvider
-        .state('add-recompense', {
-            url: '/add-recompense',
-            templateUrl: 'modules/recompense/views/add-recompense-form.html',
-            controller: 'AddRecompenseController'
+        .state('recompenses', {
+            url: '/recompenses',
+            templateUrl: 'modules/recompense/views/recompenses.html',
+            controller: 'RecompensesController'
         })
         .state('forbidden', {
             url: '/forbidden',
             templateUrl: 'modules/recompense/views/forbidden.html'
-        })
-        .state('all-recompense', {
-            url: '/all-recompense',
-            templateUrl: 'modules/recompense/views/all-recompense.html',
-            controller: 'AllRecompenseController'
         });
 
-    $urlRouterProvider.otherwise('all-recompense');
+    $urlRouterProvider.otherwise('recompenses');
 
 }]);
