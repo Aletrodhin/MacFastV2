@@ -1,13 +1,13 @@
-
 <h1>Ajouter une récompense</h1>
 
+<!-- Contenu -->
 <div class="row">
     <div class="col m3">
-        <ul class="collapsible" data-collapsible="accordion" watch>
-            <li ng-repeat="r in recompenses" ng-click="changeRecompense(r.id)">
-                <div class="collapsible-header"><i class="material-icons">filter_drama</i>{{r.designation}}</div>
-                <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-            </li>
+        <ul class="collection with-header">
+            <li class="collection-header">Liste de récompense</li>
+            <a class="collection-item" ng-repeat="r in recompenses" href="#" ng-click="changeRecompense(r.id, $event)">
+                {{r.designation}}
+            </a>
         </ul>
     </div>
     <div class="col m8 offset-m1">
@@ -26,10 +26,28 @@
                     <input id="image" type="file" ng-model="recompense.image" />
                 </div>
             </div>
-            <div class="row right">
-                <input type="button" class="btn waves-effect waves-light" onclick="resetForm()" value="Reset" />
-                <input type="submit" class="btn waves-effect waves-light" value="Ajouter" />
+
+            <div class="row">
+                <div class="left">
+                    <input type="button" class="btn waves-effect waves-light" ng-click="displayModal()" value="Supprimer" />
+                </div>
+                <div class="right">
+                    <input type="button" class="btn waves-effect waves-light" ng-click="resetForm()" value="Reset" />
+                    <input type="submit" class="btn waves-effect waves-light" value="Ajouter" />
+                </div>
             </div>
         </form>
+    </div>
+</div>
+
+<!-- Modale de confirmation de suppression -->
+<div id="mdl-suppr-recompense" class="modal">
+    <div class="modal-content">
+        <h4>Supprimer la récompense</h4>
+        <p>Etes-vous sur de vouloir supprimer la récompense : <span class="bold">{{recompense.designation}}</span> ?</p>
+    </div>
+    <div class="modal-footer">
+        <a class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="supprimerRecompense(recompense.id)" >J'accepte</a>
+        <a class="modal-action modal-close waves-effect waves-green btn-flat" >Je refuse</a>
     </div>
 </div>

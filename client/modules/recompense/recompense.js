@@ -7,19 +7,13 @@ var recompenseMod = angular.module('recompense', [
     'lbServices'
 ]);
 
-recompenseMod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+recompenseMod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider) {
 
     $stateProvider
         .state('recompenses', {
             url: '/recompenses',
             templateUrl: 'modules/recompense/views/recompenses.html',
-            controller: 'RecompensesController'
-        })
-        .state('forbidden', {
-            url: '/forbidden',
-            templateUrl: 'modules/recompense/views/forbidden.html'
+            controller: 'RecompensesController',
+            authenticate: true
         });
-
-    $urlRouterProvider.otherwise('recompenses');
-
 }]);

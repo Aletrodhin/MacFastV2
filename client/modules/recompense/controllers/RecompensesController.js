@@ -1,27 +1,43 @@
-
-recompenseMod.controller('RecompensesController',
-    ['$scope', 'Recompenses', '$state', function($scope, Recompenses){
+recompenseMod.controller('RecompensesController', ['$scope', 'Recompenses', '$rootScope', function($scope, Recompenses, $rootScope){
 
     $scope.recompense = {};
     $scope.recompenses = Recompenses.find();
 
+    /**
+     * Soumission du formulaire
+     */
     $scope.submitForm = function () {
 
-        Recompenses
-            .updateOrCreate($scope.recompense)
-            .$promise
-            .then(function () {
+        // Existence données saisies
+        if(Object.keys($scope.recompense).length){
 
-                var idRecompense = getIdFromArray($scope.recompenses, $scope.recompense.id);
-                var message = idRecompense ? "Succès de la mise à jour de la récompense" : "Succès de l'ajout d'une récompense";
+            Recompenses
+                .updateOrCreate($scope.recompense)
+                .$promise
+                .then(function () {
 
-                $scope.recompenses = Recompenses.find();
-                $scope.recompense = {};
-                Materialize.toast(message, 3500);
-            });
+                    var idRecompense = getIdFromArray($scope.recompenses, $scope.recompense.id);
+                    var message = (idRecompense > 0)
+                        ? "Succès de la mise à jour de la récompense"
+                        : "Succès de l'ajout d'une récompense";
+
+                    $scope.recompenses = Recompenses.find();
+                    $scope.recompense = {};
+                    Materialize.toast(message, 3500);
+                });
+        }
     };
 
-    $scope.changeRecompense = function (id) {
+    /**
+     * Ajoute la récompense dans le formulaire
+     *
+     * @param id
+     * @param $event
+     */
+    $rootScope.changeRecompense = function (id, $event) {
+
+        // Annule la redirection
+        $event.preventDefault();
 
         Recompenses.findById({id: id })
             .$promise
@@ -34,23 +50,40 @@ recompenseMod.controller('RecompensesController',
     *  Réinitialise le formulaire
     */
     $scope.resetForm = function () {
+
         $scope.recompense = {};
     };
 
     /**
-     * @param array
-     * @param id
+     * Supprimer une récompense depuis un identifiant
      *
-     * @return {number}
+     * @param id
      */
-    var getIdFromArray = function (array, id) {
+    $scope.supprimerRecompense = function (id) {
 
-        for(var i = 0; i < array.length; i++){
+        Recompenses.deleteById({ id: id })
+            .$promise
+            .then(function (result) {
 
-            if(array[i].id === id)
-                return id;
-        }
+                var message = "Erreur lors de la suppression de la récompense.";
 
-        return -1;
-    }
+                if(result.$resolved)
+                    message = "Succes de la suppression de la récompense.";
+
+                Materialize.toast(message, 3500);
+
+                $scope.recompenses = Recompenses.find();
+                $scope.resetForm();
+            });
+    };
+
+    /**
+     * Affiche une fenêtre modale de confirmation
+     */
+    $scope.displayModal = function () {
+
+        if(Object.keys($scope.recompense).length)
+            $('#mdl-suppr-recompense').openModal();
+    };
+
 }]);
